@@ -1,0 +1,22 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Jquery demo</title>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="http://www.appelsiini.net/projects/lazyload/jquery.lazyload.js?v=1.9.1"></script>
+</head>
+<body>
+<img class="lazy" data-original="http://upload.wikimedia.org/wikipedia/commons/8/8e/Unidentified_sailing_ship_-_LoC_4a25817u.jpg" width="640" height="480"><br>
+<img class="lazy" data-original="http://marquisknox.github.io/jQuery.LazyLoadSpin/images/l1080022.jpg" width="640" height="480">
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(function() {
+	    $("img.lazy").lazyload({
+	        event : "sporty"
+	    });
+	});
+});
+
+</script>
+</html>
