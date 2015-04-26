@@ -154,13 +154,13 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     if (index < 0) index = 0;
                     var ki = me.data.ks[index];
                     var tipHtml = '<div><b>' + convertDate(ki.quoteTime) + '</b></div>' +
-                    '×òÊÕ¼Û£º<font color="' + getPriceColor(ki, ki.preClose) + '">' + toMoney(ki.preClose) + '</font><br/>' +
-                    '¿ªÅÌ¼Û£º<font color="' + getPriceColor(ki, ki.open) + '">' + toMoney(ki.open) + '</font><br/>' +
-                    '×î¸ß¼Û£º<font color="' + getPriceColor(ki, ki.high) + '">' + toMoney(ki.high) + '</font><br/>' +
-                    '×îµÍ¼Û£º<font color="' + getPriceColor(ki, ki.low) + '">' + toMoney(ki.low) + '</font><br/>' +
-                   'ÊÕÅÌ¼Û£º<font color="' + getPriceColor(ki, ki.close) + '">' + toMoney(ki.close) + '</font><br/>' +
-                    '³É½»Á¿£º' + bigNumberToText(ki.volume / 100) + 'ÊÖ<br/>' +
-                    '³É½»¶î£º' + bigNumberToText(ki.amount);
+                    '昨收價<font color="' + getPriceColor(ki, ki.preClose) + '">' + toMoney(ki.preClose) + '</font><br/>' +
+                    '開始價<font color="' + getPriceColor(ki, ki.open) + '">' + toMoney(ki.open) + '</font><br/>' +
+                    '最高價<font color="' + getPriceColor(ki, ki.high) + '">' + toMoney(ki.high) + '</font><br/>' +
+                    '最低價<font color="' + getPriceColor(ki, ki.low) + '">' + toMoney(ki.low) + '</font><br/>' +
+                   '結束價<font color="' + getPriceColor(ki, ki.close) + '">' + toMoney(ki.close) + '</font><br/>' +
+                    '成交量' + bigNumberToText(ki.volume / 100) + 'ÊÖ<br/>' +
+                    '成交額' + bigNumberToText(ki.amount);
                     return tipHtml;
                 }
 
