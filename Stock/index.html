@@ -149,6 +149,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     }
                 }
                 function getTipHtml(x) {
+                    return '';
                     var index = me.startIndex + getIndex(x);
                     if (index >= me.data.ks.length) index = me.data.ks.length - 1;
                     if (index < 0) index = 0;
@@ -224,7 +225,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                         document.body.appendChild(controllerCanvas);
                     }
                     var priceRegion = me.klOptions.priceLine.region;
-                    setDebugMsg('priceRegion.width=' + priceRegion.width);
+                    setDebugMsg('priceRegion.width=' + prgetTipHtmliceRegion.width);
                     controllerCanvas.width = priceRegion.width;
                     controllerCanvas.height = priceRegion.height;
                     var canvasPosition = getPageCoord(me.canvas);
