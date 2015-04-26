@@ -159,7 +159,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     '最高價<font color="' + getPriceColor(ki, ki.high) + '">' + toMoney(ki.high) + '</font><br/>' +
                     '最低價<font color="' + getPriceColor(ki, ki.low) + '">' + toMoney(ki.low) + '</font><br/>' +
                    '最後價<font color="' + getPriceColor(ki, ki.close) + '">' + toMoney(ki.close) + '</font><br/>' +
-                    '成交量' + bigNumberToText(ki.volume / 100) + 'ÊÖ<br/>' +
+                    '成交量' + bigNumberToText(ki.volume / 100) +'<br/>' +
                     '成交額' + bigNumberToText(ki.amount);
                     return tipHtml;
                 }
