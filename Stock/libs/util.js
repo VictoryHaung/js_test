@@ -60,11 +60,11 @@ blog:http://www.cnblogs.com/yukaizhao/
             var result;
             var yi = val / 100000000;
             if (yi > 1) {
-                result = yi.toFixed(2) + 'ÒÚ';
+                result = yi.toFixed(2) + 'e';
             } else {
                 var wan = val / 10000;
                 if (wan > 1)
-                    result = wan.toFixed() + 'Íò';
+                    result = wan.toFixed() + 'm';
                 else
                     result = val;
             }
