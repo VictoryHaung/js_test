@@ -153,14 +153,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     if (index >= me.data.ks.length) index = me.data.ks.length - 1;
                     if (index < 0) index = 0;
                     var ki = me.data.ks[index];
-                    var tipHtml = '<div><b>' + convertDate(ki.quoteTime) + '</b></div>' +
-                    '昨收價<font color="' + getPriceColor(ki, ki.preClose) + '">' + toMoney(ki.preClose) + '</font><br/>' +
-                    '開始價<font color="' + getPriceColor(ki, ki.open) + '">' + toMoney(ki.open) + '</font><br/>' +
-                    '最高價<font color="' + getPriceColor(ki, ki.high) + '">' + toMoney(ki.high) + '</font><br/>' +
-                    '最低價<font color="' + getPriceColor(ki, ki.low) + '">' + toMoney(ki.low) + '</font><br/>' +
-                   '結束價<font color="' + getPriceColor(ki, ki.close) + '">' + toMoney(ki.close) + '</font><br/>' +
-                    '成交量' + bigNumberToText(ki.volume / 100) + 'ÊÖ<br/>' +
-                    '成交額' + bigNumberToText(ki.amount);
+                    var tipHtml = '<div><b>' + convertDate(ki.quoteTime);
                     return tipHtml;
                 }
 
