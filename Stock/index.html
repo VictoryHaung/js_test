@@ -1,21 +1,21 @@
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=GBK" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <title>k line painter</title>
-    <script src="libs/loading.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/util.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/absPainter.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/ajax.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/crossLines.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/axis-x.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/tip.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/linepainter.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/volumePainter.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/axis-y.js" type="text/javascript" charset="GBK"></script>
-    <script src="libs/chartEventHelper.js?abc" type="text/javascript" charset="GBK"></script>
-    <script type="text/javascript" src="libs/controller.js" charset="GBK"></script>
+    <script src="libs/loading.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/absPainter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/ajax.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/crossLines.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/axis-x.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/tip.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/linepainter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/volumePainter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/axis-y.js" type="text/javascript" charset="utf-8"></script>
+    <script src="libs/chartEventHelper.js?abc" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/controller.js" charset="utf-8"></script>
     <script type="text/javascript">
 /*
 html5ÐÐÇéÍ¼¿â
@@ -149,12 +149,18 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     }
                 }
                 function getTipHtml(x) {
-                    return '';
                     var index = me.startIndex + getIndex(x);
                     if (index >= me.data.ks.length) index = me.data.ks.length - 1;
                     if (index < 0) index = 0;
                     var ki = me.data.ks[index];
-                    var tipHtml = '<div><b>' + convertDate(ki.quoteTime);
+                    var tipHtml = '<div><b>' + convertDate(ki.quoteTime) + '</b></div>' +
+                    '昨收價<font color="' + getPriceColor(ki, ki.preClose) + '">' + toMoney(ki.preClose) + '</font><br/>' +
+                    '開盤價<font color="' + getPriceColor(ki, ki.open) + '">' + toMoney(ki.open) + '</font><br/>' +
+                    '最高價<font color="' + getPriceColor(ki, ki.high) + '">' + toMoney(ki.high) + '</font><br/>' +
+                    '最低價<font color="' + getPriceColor(ki, ki.low) + '">' + toMoney(ki.low) + '</font><br/>' +
+                   '最後價<font color="' + getPriceColor(ki, ki.close) + '">' + toMoney(ki.close) + '</font><br/>' +
+                    '成交量' + bigNumberToText(ki.volume / 100) + 'ÊÖ<br/>' +
+                    '成交額' + bigNumberToText(ki.amount);
                     return tipHtml;
                 }
 
@@ -175,7 +181,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                 color: 'black'
                 }
                 });
-                
+                */
                 if(!me.crossLineAndTipMgrInstance){
                     me.crossLineAndTipMgrInstance = new crossLinesAndTipMgr(me.canvas, {
                         getCrossPoint: function (ev) { return { x: getX(ev.offsetX), y: ev.offsetY }; },
@@ -211,7 +217,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                             }
                         });
                 }
-                */
+                
                 if (me.controller == null && run_only_one == 0) {
                     
                     me.implement.paintPriceLine.call(me);
@@ -225,7 +231,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                         document.body.appendChild(controllerCanvas);
                     }
                     var priceRegion = me.klOptions.priceLine.region;
-                    setDebugMsg('priceRegion.width=' + prgetTipHtmliceRegion.width);
+                    setDebugMsg('priceRegion.width=' + priceRegion.width);
                     controllerCanvas.width = priceRegion.width;
                     controllerCanvas.height = priceRegion.height;
                     var canvasPosition = getPageCoord(me.canvas);
@@ -789,7 +795,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
 <script type="text/javascript" src="libs/controller.js"></script>
     
 </head>
-<body style="padding:0;margin:2px">
+<body onload="" style="padding:0;margin:2px">
     <canvas id="canvasKL" width="1002" height="460" style="z-index: 2; border: 1px solid #69c">
         <p>hey,ÄúµÄä¯ÀÀÆ÷²»Ö§³Öhtml5£¬»»¸öä¯ÀÀÆ÷°É£¬±ÈÈçgoogle chrome£¬firefox</p>
     </canvas>
@@ -800,7 +806,8 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
 
 
     <pre>
-Source：html54stock-->https://code.google.com/p/html54stock/
+html54stock https://code.google.com/p/html54stock/
+²ÎÓëÏîÄ¿»ò¼¼Êõ½»Á÷£º<a href="mailto:yukaizhao@gmail.com">yukaizhao@gmail.com</a>
     </pre>
 </body>
 </html>
