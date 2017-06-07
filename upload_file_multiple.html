@@ -1,0 +1,98 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type='text/javascript' src='http://codeseven.github.io/toastr/build/toastr.min.js'></script>
+<link rel="stylesheet" href="http://codeseven.github.io/toastr/build/toastr.min.css">
+
+<link rel="stylesheet" href="http://lokeshdhakar.com/projects/lightbox2/css/lightbox.css">
+<script type='text/javascript' src="http://lokeshdhakar.com/projects/lightbox2/js/lightbox-plus-jquery.min.js"></script>
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('#btn_reset').on('click', function() {
+        $('#form').trigger("reset");
+    });
+    $('#btn_submit').on('click', function() {
+        if ($('#uploadfileTable tr').length > 1){
+            $("#form").attr("action", "");
+            $("#form").submit();
+        }else{
+            tempAlert('請選擇',3000);
+        }
+        $("#mask").unmask();
+    });
+    $('#uploadfileTable').on('click','#delTr' ,function() {
+        $('#tr'+$(this).attr('dataID')).remove();
+    });
+});
+
+var load_File = function(id,event) {
+    var inputs = $('#data_file');
+    $("#copy_files").append(inputs);
+    $("#more_files").append(" <input type=\"file\"  onchange=\"load_File(this.id,event)\" multiple  id='data_file' name=data_file[] />");
+    $('#copy_files').hide();
+    var htmlWord = '';
+    //$("#uploadfileTable").find("tr:gt(0)").remove();
+    for (var i = event.target.files.length-1; i >= 0; i--) {
+        var ext = event.target.files[i].name.split('.').pop().toLowerCase().toLowerCase();
+        if(!($.inArray(ext, ['gif','png','jpg','jpeg','pdf','doc','docx','csv','xls','xlsx']) == -1)) {
+            var href = URL.createObjectURL(event.target.files[i]);
+            if(ext == 'gif' || ext == 'png' || ext == 'jpg' || ext == 'jpeg'){
+                htmlWord += '<tr id="tr'+i+'"><td class="grid_td"><a href="'+href+'" id="file'+i+'" class="example-image-link" data-lightbox="example-1">'+event.target.files[i].name+'</a>';
+            }else{
+                htmlWord += '<tr id="tr'+i+'"><td class="grid_td"><a href="'+href+'" id="file'+i+'" Target="_blank">'+event.target.files[i].name+'  </a>';
+            }
+            htmlWord += '<input type="hidden" id="dfile'+i+'" value="'+event.target.files[i].name+'" name="dfile['+event.target.files[i].name+']" />';
+            htmlWord += '</td><td class="grid_td"><input type="text" id="sort'+i+'" name="sort['+event.target.files[i].name+']" /> <a href="#" id="delTr" dataID="'+i+'">X</a></td></tr>';
+        }else{
+            tempAlert('請選擇圖檔，word，Excel ，PDF檔',4000);
+            return false;
+        }
+    }
+    $('#uploadfileTable tr:last').after(htmlWord);
+};
+function tempAlert(msg, duration) {
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "rtl": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": 300,
+      "hideDuration": 1000,
+      "timeOut": duration,
+      "extendedTimeOut": 1000,
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    toastr["warning"](msg)
+}
+
+</script>
+
+    <form id="form" method="post"  enctype="multipart/form-data" >
+        <table id="uploadfileTable" width="100%" height="35" border="1" cellspacing="0" cellpadding="0" class="grid_table">
+            <tr>
+                <td class="grid_td">
+                    上傳檔案(可多檔案)<span id="more_files"><input type="file" id="data_file" name="data_file[]"  onchange="load_File(this.id,event)" multiple /></span>
+                    <span id="copy_files"></span>
+                  
+                </td>
+                <td class="grid_td" bgcolor="#dddddd">
+                    排序(編號)
+                </td>
+            </tr>
+        </table>
+        <div class="bottom_banner">
+            <button type="button" id="btn_submit" class="btn l">submit</button>
+        </div>
+    
+    </form>
